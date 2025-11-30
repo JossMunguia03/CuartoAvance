@@ -1,0 +1,34 @@
+{
+  "name": "gratiday-rest-api",
+  "version": "1.0.0",
+  "description": "API REST con JWT para la plataforma GratiDay - Gestión de frases de gratitud, categorías y usuarios",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seed.js",
+    "test-connection": "node test-connection.js",
+    "fix-passwords": "node fix-passwords.js"
+  },
+  "keywords": [
+    "gratitud",
+    "motivacion",
+    "frases",
+    "api",
+    "rest",
+    "jwt",
+    "express"
+  ],
+  "author": "José Manuel Leyva Munguía",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "mysql2": "^3.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
