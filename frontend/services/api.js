@@ -5,6 +5,30 @@
 const API_BASE_URL = 'http://localhost:3000/api/v1';
 
 class ApiService {
+    constructor() {
+        /**
+         * Token JWT actual en memoria (no se guarda en localStorage por seguridad)
+         * @type {string|null}
+         * @private
+         */
+        this._token = null;
+    }
+
+    /**
+     * Establece el token JWT en memoria
+     * @param {string|null} token
+     */
+    setToken(token) {
+        this._token = token || null;
+    }
+
+    /**
+     * Limpia el token JWT en memoria
+     */
+    clearToken() {
+        this._token = null;
+    }
+
     /**
      * Realiza una petición HTTP genérica
      * @param {string} endpoint - Endpoint de la API
@@ -13,7 +37,7 @@ class ApiService {
      */
     async request(endpoint, options = {}) {
         const url = `${API_BASE_URL}${endpoint}`;
-        const token = localStorage.getItem('auth_token');
+        const token = this._token;
 
         const defaultHeaders = {
             'Content-Type': 'application/json',

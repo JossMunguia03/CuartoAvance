@@ -42,5 +42,8 @@ router.patch('/:id/borrador', authenticateToken, phraseController.draft);
 // Eliminar una frase (Protegida)
 router.delete('/:id', authenticateToken, phraseController.remove);
 
+// Verificar estado del scheduler de publicación automática (Protegida, solo admin)
+router.get('/scheduler/estado', authenticateToken, phraseController.checkScheduler);
+
 module.exports = router;
 

@@ -5,6 +5,22 @@
 import { apiService } from './api.js';
 
 class AuthService {
+    constructor() {
+        /**
+         * Token JWT actual (solo en memoria, no persistente)
+         * @type {string|null}
+         * @private
+         */
+        this._token = null;
+
+        /**
+         * Datos del usuario autenticado (solo en memoria)
+         * @type {object|null}
+         * @private
+         */
+        this._currentUser = null;
+    }
+
     /**
      * Inicia sesión y guarda el token
      * @param {string} email - Correo electrónico
@@ -16,8 +32,10 @@ class AuthService {
             const response = await apiService.login(email, password);
             
             if (response.token) {
-                localStorage.setItem('auth_token', response.token);
-                localStorage.setItem('user_data', JSON.stringify(response.usuario));
+                // Guardar solo en memoria por seguridad
+                this._token = response.token;
+                this._currentUser = response.usuario || null;
+                apiService.setToken(response.token);
                 return response;
             }
             
@@ -41,8 +59,10 @@ class AuthService {
             const response = await apiService.register(nombre, email, password, rol);
             
             if (response.token) {
-                localStorage.setItem('auth_token', response.token);
-                localStorage.setItem('user_data', JSON.stringify(response.usuario));
+                // Guardar solo en memoria por seguridad
+                this._token = response.token;
+                this._currentUser = response.usuario || null;
+                apiService.setToken(response.token);
                 return response;
             }
             
@@ -57,8 +77,9 @@ class AuthService {
      * Cierra la sesión del usuario
      */
     logout() {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user_data');
+        this._token = null;
+        this._currentUser = null;
+        apiService.clearToken();
         window.location.reload();
     }
 
@@ -67,7 +88,7 @@ class AuthService {
      * @returns {boolean}
      */
     isAuthenticated() {
-        return !!localStorage.getItem('auth_token');
+        return !!this._token;
     }
 
     /**
@@ -75,8 +96,7 @@ class AuthService {
      * @returns {object|null}
      */
     getCurrentUser() {
-        const userData = localStorage.getItem('user_data');
-        return userData ? JSON.parse(userData) : null;
+        return this._currentUser;
     }
 
     /**
@@ -84,7 +104,24 @@ class AuthService {
      * @returns {string|null}
      */
     getToken() {
-        return localStorage.getItem('auth_token');
+        return this._token;
+    }
+
+    /**
+     * Obtiene el rol del usuario actual
+     * @returns {string|null} - 'admin' o 'user' o null si no está autenticado
+     */
+    getUserRole() {
+        const user = this.getCurrentUser();
+        return user ? user.rol : null;
+    }
+
+    /**
+     * Verifica si el usuario actual es administrador
+     * @returns {boolean}
+     */
+    isAdmin() {
+        return this.getUserRole() === 'admin';
     }
 }
 

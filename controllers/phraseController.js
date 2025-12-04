@@ -165,4 +165,25 @@ exports.remove = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
+exports.checkScheduler = async (req, res, next) => {
+    try {
+        const scheduler = require('../services/scheduler');
+        const status = scheduler.getStatus();
+        
+        // Ejecutar verificación manual si se solicita
+        if (req.query.execute === 'true') {
+            await scheduler.checkAndPublishScheduled();
+            return res.status(200).json({ 
+                mensaje: 'Verificación de frases programadas ejecutada manualmente',
+                estado: status
+            });
+        }
+        
+        res.status(200).json({ 
+            mensaje: 'Estado del scheduler de publicación automática',
+            estado: status
+        });
+    } catch (error) { next(error); }
+};
+
 
