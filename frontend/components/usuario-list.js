@@ -3,10 +3,7 @@
  */
 
 import { apiService } from '../services/api.js';
-<<<<<<< HEAD
 import { authService } from '../services/auth.js';
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
 import { showToast, showLoading, hideLoading } from '../app.js';
 
 class GratidayUsuarioList extends HTMLElement {
@@ -16,19 +13,13 @@ class GratidayUsuarioList extends HTMLElement {
     }
 
     connectedCallback() {
-<<<<<<< HEAD
         // Solo cargar si el usuario está autenticado Y es admin
         if (this.isAuthenticated() && authService.isAdmin()) {
-=======
-        // Solo cargar si el usuario está autenticado
-        if (this.isAuthenticated()) {
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
             this.render();
             this.loadUsuarios();
         } else {
             this.render();
         }
-<<<<<<< HEAD
         
         // Escuchar cambios de autenticación para re-renderizar
         window.addEventListener('auth-state-changed', () => {
@@ -45,16 +36,6 @@ class GratidayUsuarioList extends HTMLElement {
 
     async loadUsuarios() {
         if (!this.isAuthenticated() || !authService.isAdmin()) {
-=======
-    }
-
-    isAuthenticated() {
-        return !!localStorage.getItem('auth_token');
-    }
-
-    async loadUsuarios() {
-        if (!this.isAuthenticated()) {
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
             return;
         }
         try {
@@ -70,7 +51,6 @@ class GratidayUsuarioList extends HTMLElement {
     }
 
     render() {
-<<<<<<< HEAD
         const isAdmin = authService.isAdmin();
         
         // Si no es admin, mostrar mensaje de acceso denegado
@@ -87,8 +67,6 @@ class GratidayUsuarioList extends HTMLElement {
             return;
         }
 
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
         this.innerHTML = `
             <div class="entity-container">
                 <div class="entity-header">
@@ -138,14 +116,11 @@ class GratidayUsuarioList extends HTMLElement {
     }
 
     attachEventListeners() {
-<<<<<<< HEAD
         // Solo permitir acciones si el usuario es admin
         if (!authService.isAdmin()) {
             return;
         }
 
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
         const addBtn = this.querySelector('#add-usuario-btn');
         if (addBtn) {
             addBtn.addEventListener('click', () => {

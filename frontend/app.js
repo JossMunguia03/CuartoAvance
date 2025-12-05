@@ -67,7 +67,6 @@ function initApp() {
     // Escuchar eventos de actualización
     window.addEventListener('auth-success', () => {
         showDashboard();
-<<<<<<< HEAD
         // Disparar evento de cambio de estado de autenticación
         window.dispatchEvent(new CustomEvent('auth-state-changed'));
         // Forzar re-renderizado de todos los componentes después de un breve delay
@@ -75,9 +74,6 @@ function initApp() {
         setTimeout(() => {
             reloadAllComponents();
         }, 100);
-=======
-        window.dispatchEvent(new CustomEvent('auth-state-changed'));
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
     });
 
     window.addEventListener('frase-updated', () => {
@@ -92,11 +88,7 @@ function initApp() {
 
     window.addEventListener('usuario-updated', () => {
         const usuarioList = document.querySelector('gratiday-usuario-list');
-<<<<<<< HEAD
         if (usuarioList && authService.isAuthenticated() && authService.isAdmin()) {
-=======
-        if (usuarioList && authService.isAuthenticated()) {
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
             usuarioList.loadUsuarios();
         }
     });
@@ -104,17 +96,8 @@ function initApp() {
     // Escuchar cambios de autenticación para recargar componentes
     window.addEventListener('auth-state-changed', () => {
         if (authService.isAuthenticated()) {
-<<<<<<< HEAD
             // Recargar todos los componentes cuando cambia el estado de autenticación
             reloadAllComponents();
-=======
-            // Recargar componentes cuando se autentica
-            const usuarioList = document.querySelector('gratiday-usuario-list');
-            if (usuarioList) {
-                usuarioList.render();
-                usuarioList.loadUsuarios();
-            }
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
         }
     });
 }
@@ -139,14 +122,11 @@ function showDashboard() {
 
     if (loginView) loginView.classList.add('hidden');
     if (dashboardView) dashboardView.classList.remove('hidden');
-<<<<<<< HEAD
     
     // Asegurar que los componentes se rendericen correctamente cuando se muestra el dashboard
     setTimeout(() => {
         reloadAllComponents();
     }, 50);
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
 }
 
 /**
@@ -156,17 +136,13 @@ function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const views = document.querySelectorAll('.view');
 
-<<<<<<< HEAD
     // Ocultar pestañas según el rol del usuario
     updateTabsVisibility();
 
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetView = btn.dataset.view;
 
-<<<<<<< HEAD
             // Si el usuario no es admin y trata de acceder a una vista restringida, redirigir a frases
             if (!authService.isAdmin() && (targetView === 'categorias' || targetView === 'usuarios')) {
                 const frasesTab = document.querySelector('.tab-btn[data-view="frases"]');
@@ -177,8 +153,6 @@ function setupTabs() {
                 return;
             }
 
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
             // Actualizar botones activos
             tabButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -188,7 +162,6 @@ function setupTabs() {
                 if (v.id === `${targetView}-view`) {
                     v.classList.remove('hidden');
                     v.classList.add('active');
-<<<<<<< HEAD
                     
                     // Asegurar que los componentes dentro de la vista se rendericen correctamente
                     if (targetView === 'frases') {
@@ -214,8 +187,6 @@ function setupTabs() {
                             }
                         }
                     }
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
                 } else {
                     v.classList.add('hidden');
                     v.classList.remove('active');
@@ -223,7 +194,6 @@ function setupTabs() {
             });
         });
     });
-<<<<<<< HEAD
 
     // Actualizar visibilidad cuando cambie el estado de autenticación
     window.addEventListener('auth-state-changed', () => {
@@ -314,8 +284,6 @@ function updateTabsVisibility() {
             }
         }
     }
-=======
->>>>>>> 7187062503d90affb6088570f8edb85756c7e489
 }
 
 // Inicializar cuando el DOM esté listo
