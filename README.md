@@ -61,7 +61,7 @@ DB_NAME=gratiday
 DB_CHARSET=utf8mb4
 
 # JWT
-JWT_SECRET=tu_secreto_jwt_seguro
+SECRET_KEY=tu_secreto_jwt_seguro
 
 # Servidor
 PORT=3000
