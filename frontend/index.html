@@ -3,16 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GratiDay</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>GratiDay - Frases de Gratitud y Motivación</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
 </head>
 <body>
-
+    <!-- Navbar Component -->
     <gratiday-navbar></gratiday-navbar>
 
-    <main id="app"></main>
+    <!-- Main Container -->
+    <main id="app-container">
+        <!-- Login View (mostrado por defecto si no hay token) -->
+        <gratiday-login id="login-view"></gratiday-login>
 
+        <!-- Dashboard View (mostrado después del login) -->
+        <div id="dashboard-view" class="dashboard hidden">
+            <!-- Navigation Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-view="frases">📝 Frases</button>
+                <button class="tab-btn" data-view="categorias">📂 Categorías</button>
+                <button class="tab-btn" data-view="usuarios">👥 Usuarios</button>
+            </div>
+
+            <!-- Content Views -->
+            <div class="views-container">
+                <!-- Frases View -->
+                <div id="frases-view" class="view active">
+                    <gratiday-frase-list></gratiday-frase-list>
+                </div>
+
+                <!-- Categorías View -->
+                <div id="categorias-view" class="view hidden">
+                    <gratiday-categoria-list></gratiday-categoria-list>
+                </div>
+
+                <!-- Usuarios View -->
+                <div id="usuarios-view" class="view hidden">
+                    <gratiday-usuario-list></gratiday-usuario-list>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="services/auth.js"></script>
+    <script type="module" src="components/navbar.js"></script>
+    <script type="module" src="components/login-form.js"></script>
+    <script type="module" src="components/frase-list.js"></script>
+    <script type="module" src="components/frase-form.js"></script>
+    <script type="module" src="components/categoria-list.js"></script>
+    <script type="module" src="components/categoria-form.js"></script>
+    <script type="module" src="components/usuario-list.js"></script>
+    <script type="module" src="components/usuario-form.js"></script>
     <script type="module" src="app.js"></script>
-
 </body>
 </html>
+
