@@ -32,7 +32,7 @@ Plataforma web completa para gestionar frases de gratitud, categorías y usuario
 ### 1. Clonar o descargar el proyecto
 
 ```bash
-cd Asignacion11
+cd NombreCarpetaProyecto
 ```
 
 ### 2. Instalar dependencias
@@ -91,7 +91,7 @@ El servidor estará disponible en: `http://localhost:3000`
 ### Paso 1: Asegurar que el Backend esté corriendo
 
 ```bash
-cd Asignacion11
+cd "NombreCarpetaProyecto"
 npm start
 ```
 
